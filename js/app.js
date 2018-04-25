@@ -2,6 +2,7 @@ var restartClass = '.restart';
 var clicks = 0;
 var moves = 0;
 var falseMatches = 0;
+var ratingList = document.querySelector('.stars');
 var moveElement = document.querySelector('.moves');
 var deck = document.querySelector('.deck');
 var cards = ['fa-diamond','fa-paper-plane-o','fa-anchor','fa-bolt','fa-cube','fa-leaf','fa-bicycle',
@@ -79,28 +80,55 @@ function increaseMoves(){
   moves++;
   updateMoves(moves);
 }
-function resetFlaseMatches(){
-  falseMatches = 0;
-}
+
+/************************
+rating UTILS
+************************/
 function incFalseMatches(){
   falseMatches++;
-  console.log(falseMatches);
+
+  // update the rating according to the increase of false matches
   updateRating(falseMatches);
 }
-function removeStars(){
-  var ratingList = document.querySelector(".stars");
-  ratingList.removeChild(ratingList.lastChild);
-}
-function resetRating(){
-  resetFlaseMatches();
-}
+// updateRating will remove according to number of falseMatches
 function updateRating(falseMatches){
-  console.log(falseMatches);
-  if (falseMatches > 9){
+  if (falseMatches > 19){
     removeStars();
   }
 }
 
+// remove stars according to the number of false matches
+function removeStars(){
+  if (ratingList.children.length > 1){
+    ratingList.removeChild(ratingList.querySelector('li:last-of-type'));
+  }
+  resetFlaseMatches();
+}
+function drawRatingSystem(){
+  ratingList.innerHTML = '';
+  var ratingFragment = document.createDocumentFragment();
+  for (var i = 0 ; i < 3 ; i++){
+    var rateElement = document.createElement('LI');
+    var starIcon = document.createElement('I');
+
+    //create stars icon
+    starIcon.classList.add('fa','fa-star');
+
+    // appnd rating Stars to rating Fragment
+    rateElement.appendChild(starIcon);
+    ratingFragment.appendChild(rateElement);
+  }
+
+  // append the rating Fragment to the ratinglist
+  ratingList.appendChild(ratingFragment);
+}
+function resetRating(){
+  resetFlaseMatches();
+  drawRatingSystem();
+}
+function resetFlaseMatches(){
+  falseMatches = 0;
+}
 
 /************************
 CARDS UTILS
@@ -140,12 +168,14 @@ GAME UTILITES
 function reset(){
   resetMoves();
   resetCards();
+  resetRating();
 }
 function start(){
   var restartButton = document.querySelector(restartClass);
   restartButton.addEventListener('click',reset);
   deck.addEventListener("click",main);
   drawCards(deck);
+  drawRatingSystem();
 }
 
 /************************
@@ -180,7 +210,7 @@ start();
 2- define classes as variables
 3- make timer
 4- make congratulations popup message (moves appear/restartbutton/rating)
-5- decrease star-rating accordign to Moves
+5- decrease star-rating accordign to Moves   ---finished--
 6- setup readme page for github
 
 */
