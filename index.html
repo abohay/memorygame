@@ -16,21 +16,37 @@
         </header>
 
         <section class="score-panel">
-        	<ul class="stars">
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        		<li><i class="fa fa-star"></i></li>
-        	</ul>
+        	<ul id="stars">
+          </ul>
 
-        	<span class="moves">0</span> Moves
-
-            <div class="restart">
+        	<span id="moves">0</span> Moves
+          <span id="mytimer">00:00:00</span>
+            <div id="restart">
         		<i class="fa fa-repeat"></i>
         	</div>
         </section>
 
         <ul class="deck">
         </ul>
+    </div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span id="close">&times;</span>
+        <h2>Congratulations</h2>
+        <section class="score-panel">
+          <div id="modalRating">
+            <h4>Rating</h4>
+          </div>
+          <span id="modalMoves">0</span> Moves
+          <span id="modalTimer"></span>
+          <button id="start-again">play again</button>
+        </section>
+      </div>
+
     </div>
 
     <script src="js/app.js"></script>
