@@ -1,12 +1,11 @@
-var clicks = 0;
 var moves = 0;
 var falseMatches = 0;
 var decStarsLimit = 4;
 var timerActive = false;
+var deck = document.querySelector('.deck');
 var timerElement = document.getElementById('mytimer');
 var ratingList = document.getElementById('stars');
 var moveElement = document.getElementById('moves');
-var deck = document.querySelector('.deck');
 var popupBackground = document.getElementById('myModal');
 var popupClose = document.getElementById("close");
 var popupRating =document.getElementById('modalRating');
@@ -14,8 +13,9 @@ var popupTimer = document.getElementById('modalTimer');
 var popupMoves = document.getElementById('modalMoves');
 var playagainbtn = document.getElementById('start-again');
 var restartButton = document.getElementById('restart');
-var cards = ['fa-diamond','fa-paper-plane-o','fa-anchor','fa-bolt','fa-cube','fa-leaf','fa-bicycle',
-'fa-bomb','fa-diamond','fa-paper-plane-o','fa-anchor','fa-bolt','fa-cube','fa-leaf','fa-bicycle','fa-bomb'];
+var cardsForConcat = ['fa-diamond','fa-paper-plane-o','fa-anchor','fa-bolt','fa-cube','fa-leaf','fa-bicycle',
+'fa-bomb'];
+var cards = cardsForConcat.concat(cardsForConcat);
 //var cards = ['fa-diamond','fa-diamond'];
 /************************
 MOVES utils
@@ -144,7 +144,7 @@ function showCard(clickedElementParam){
 }
 
 function shouldClicked (clickedElementParam){
-  return clickedElementParam.classList.contains('card') && !clickedElementParam.classList.contains('match');
+  return clickedElementParam.classList.contains('card') && !clickedElementParam.classList.contains('match','open','show');
 }
 
 function hideUnmatched(openedCards){
@@ -264,21 +264,20 @@ MAIN GAME LOGIC
 function main(evt){
   var clickedElement = evt.target;
   if (shouldClicked(clickedElement)){
-  if (clicks < 2){
     showCard(clickedElement);
-    clicks += 1;
-  }
-  if(clicks === 2){
-    clicks = 0 ;
-    increaseMoves();
-    var openedCards = document.querySelectorAll('.open.show:not(.match)'); // all the elements contains both open and show
-    if (isMatch(openedCards)){
-     flagAsMatched(openedCards);
-   }else{
-     hideUnmatched(openedCards);
-     incFalseMatches();
-   }
-  }
+
+    // all the elements contains both open and show
+    var openedCards = document.querySelectorAll('.open.show:not(.match)');
+
+    if(openedCards.length === 2){
+      increaseMoves();
+      if (isMatch(openedCards)){
+       flagAsMatched(openedCards);
+      }else{
+      hideUnmatched(openedCards);
+      incFalseMatches();
+     }
+    }
   }
   activateTimer(timerActive);
   checkifGameFinsihed();
