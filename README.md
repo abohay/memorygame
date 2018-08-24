@@ -1,20 +1,24 @@
 # Memory Game Project
 
-## Table of Contents
+## What is the Memory Game
+simple game for matching each two cards in the board
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+
+## How to Play
+you can use this link for live preview https://abohay.github.io/memorygame/
 
 ## Instructions
+1-click on the card
+2-click on the other cards to find match
+3-the less false matches  you do the more stars you get
+4-after finishing timer will stop so be fast to get the best ssore
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
-
-To get started, open `js/app.js` and start building out the app's functionality
-
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
-
-## Contributing
-
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
-
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+## How I built the Memory Game
+1-by manipulation of the DOM with vanilla js
+2-i shuffled the cards which are in array
+3-then drawing the cards on the deck
+4-after that I have created function to count up
+5-then a function to calculate move
+6-after that I created a function for matching code
+7-after that I created a function for reset the game
+8-after that I created a function for the congratulation popup
